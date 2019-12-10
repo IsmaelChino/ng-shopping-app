@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  componentFlag = true;
 
+  getOptionToDisplay(optionToDisplay: string) {
+    if (optionToDisplay === 'Recipes') {
+      this.componentFlag = true;
+    } else {
+      this.componentFlag = false;
+    }
+  }
 }
