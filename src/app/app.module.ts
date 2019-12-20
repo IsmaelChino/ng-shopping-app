@@ -1,3 +1,4 @@
+import { AppRoutingModule } from './app-routing.module';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { ShoppingListEditComponent } from './shopping-list-feature/shopping-list-edit/shopping-list-edit.component';
@@ -10,6 +11,8 @@ import { HeaderComponent } from './header/header.component';
 import { ShoppingListComponent } from './shopping-list-feature/shopping-list/shopping-list.component';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeItemComponent } from './recipes/recipe-item/recipe-item.component';
+import { DropdownDirective } from './shared/dropdown.directive';
+import { EmptyRecipeComponent } from './recipes/empty-recipe/empty-recipe.component';
 
 @NgModule({
   declarations: [
@@ -20,11 +23,14 @@ import { RecipeItemComponent } from './recipes/recipe-item/recipe-item.component
     RecipesComponent,
     RecipeListComponent,
     RecipeItemComponent,
-    RecipeDetailComponent
+    RecipeDetailComponent,
+    DropdownDirective,
+    EmptyRecipeComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
