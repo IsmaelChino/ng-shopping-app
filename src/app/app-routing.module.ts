@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth/auth.guard';
 import { AuthComponent } from './auth/auth.component';
 import { RecipesResolverService } from './recipes/recipes-resolver.service';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
@@ -11,20 +12,24 @@ import { Routes, RouterModule } from '@angular/router';
 
 const appRoutes: Routes = [
     {path: '', redirectTo: '/recipes', pathMatch: 'full'},
-    {path: 'recipes', component: RecipesComponent, children: [
-        {path: '', component: EmptyRecipeComponent},
-        {path: 'new', component: RecipeEditComponent},
-        {
-            path: ':recipeId',
-            component: RecipeDetailComponent,
-            resolve: [RecipesResolverService]
-        },
-        {
-            path: ':recipeId/edit',
-            component: RecipeEditComponent,
-            resolve: [RecipesResolverService]
-        }
-    ]},
+    {
+        path: 'recipes',
+        component: RecipesComponent,
+        canActivate: [AuthGuard],
+        children: [
+            {path: '', component: EmptyRecipeComponent},
+            {path: 'new', component: RecipeEditComponent},
+            {
+                path: ':recipeId',
+                component: RecipeDetailComponent,
+                resolve: [RecipesResolverService]
+            },
+            {
+                path: ':recipeId/edit',
+                component: RecipeEditComponent,
+                resolve: [RecipesResolverService]
+            }
+        ]},
     {path: 'shoppingList', component: ShoppingListComponent},
     {path: 'auth', component: AuthComponent}
 ];
