@@ -1,3 +1,4 @@
+import { AlertComponent } from './shared/alert/alert.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AuthComponent } from './auth/auth.component';
@@ -18,6 +19,7 @@ import { RecipeItemComponent } from './recipes/recipe-item/recipe-item.component
 import { DropdownDirective } from './shared/dropdown.directive';
 import { EmptyRecipeComponent } from './recipes/empty-recipe/empty-recipe.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { PlaceholderDirective } from './shared/placeholder/placeholder.directive';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     EmptyRecipeComponent,
     RecipeEditComponent,
     AuthComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    AlertComponent,
+    PlaceholderDirective
   ],
   imports: [
     BrowserModule,
@@ -50,6 +54,9 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    AlertComponent
+  ]
 })
 export class AppModule { }
