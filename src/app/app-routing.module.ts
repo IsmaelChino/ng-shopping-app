@@ -1,42 +1,25 @@
-import { AuthGuard } from './auth/auth.guard';
-import { AuthComponent } from './auth/auth.component';
-import { RecipesResolverService } from './recipes/recipes-resolver.service';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { EmptyRecipeComponent } from './recipes/empty-recipe/empty-recipe.component';
-import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
-import { RecipeItemComponent } from './recipes/recipe-item/recipe-item.component';
-import { ShoppingListComponent } from './shopping-list-feature/shopping-list/shopping-list.component';
-import { RecipesComponent } from './recipes/recipes.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 const appRoutes: Routes = [
     {path: '', redirectTo: '/recipes', pathMatch: 'full'},
     {
         path: 'recipes',
-        component: RecipesComponent,
-        canActivate: [AuthGuard],
-        children: [
-            {path: '', component: EmptyRecipeComponent},
-            {path: 'new', component: RecipeEditComponent},
-            {
-                path: ':recipeId',
-                component: RecipeDetailComponent,
-                resolve: [RecipesResolverService]
-            },
-            {
-                path: ':recipeId/edit',
-                component: RecipeEditComponent,
-                resolve: [RecipesResolverService]
-            }
-        ]},
-    {path: 'shoppingList', component: ShoppingListComponent},
-    {path: 'auth', component: AuthComponent}
+        loadChildren: () => import('./recipes/recipes.module').then(m => m.RecipesModule)
+    },
+    {
+        path: 'shoppingList',
+        loadChildren: () => import('./shopping-list-feature/shopping-list.module').then(m => m.ShoppingListModule)
+    },
+    {
+        path: 'auth',
+        loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+    }
 ];
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes, {preloadingStrategy: PreloadAllModules})
     ],
     exports: [RouterModule]
 })
