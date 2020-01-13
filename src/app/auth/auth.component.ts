@@ -1,10 +1,8 @@
 import { Store } from '@ngrx/store';
 import { AlertComponent } from './../shared/alert/alert.component';
-import { Router } from '@angular/router';
-import { AuthService, AuthResponseData } from './auth.service';
 import { NgForm } from '@angular/forms';
 import { Component, ComponentFactoryResolver, ViewChild, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { PlaceholderDirective } from '../shared/placeholder/placeholder.directive';
 import * as fromApp from '../store/app.reducer';
 import * as AuthActions from './store/auth.actions';
@@ -23,8 +21,6 @@ export class AuthComponent implements OnInit, OnDestroy {
   private storeSub: Subscription;
 
   constructor(
-    private authService: AuthService,
-    private router: Router,
     private componentFactoryResolver: ComponentFactoryResolver,
     private store: Store<fromApp.AppState>
   ) {}
@@ -50,7 +46,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     const email = form.value.email;
     const password = form.value.password;
 
-    let authObs: Observable<AuthResponseData>;
+    // let authObs: Observable<AuthResponseData>;
 
     this.isLoading = true;
     if (this.isLoginMode) {
