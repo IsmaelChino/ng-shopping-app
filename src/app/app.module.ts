@@ -1,8 +1,7 @@
-import { LoggingService } from './logging.service';
-import { AuthModule } from './auth/auth.module';
+import { AuthEffects } from './auth/store/auth.effects';
 import { CoreModule } from './core.module';
 import { SharedModule } from './shared/shared.module';
-import { ShoppingListModule } from './shopping-list-feature/shopping-list.module';
+import { EffectsModule } from '@ngrx/effects';
 import { AlertComponent } from './shared/alert/alert.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -24,6 +23,7 @@ import * as fromApp from './store/app.reducer';
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot(fromApp.appReducer),
+    EffectsModule.forRoot([AuthEffects]),
     SharedModule,
     CoreModule
   ],
